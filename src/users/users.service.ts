@@ -1,5 +1,7 @@
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpService } from '@nestjs/common';
+import { AxiosResponse } from 'axios';
+import { Observable } from 'rxjs';
 
 export type User = any;
 
@@ -7,7 +9,9 @@ export type User = any;
 export class UsersService {
     private readonly users: User[];
 
-    constructor() {
+    constructor(
+        private httpService: HttpService
+    ) {
         this.users = [
             {
                 userId: 1,
@@ -29,5 +33,9 @@ export class UsersService {
 
     async findOne(username: string): Promise<User | undefined> {
         return this.users.find(user => user.username === username);
+    }
+
+     findAll(): Observable<AxiosResponse<any[]>> {
+        return this.httpService.get('https://jsonplaceholder.typicode.com/users');
     }
 }

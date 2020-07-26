@@ -1,4 +1,4 @@
-import { UsersService } from './auth/users.service';
+import { UsersService } from './users/users.service';
 import { AuthModule } from './auth/auth.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
